@@ -188,31 +188,38 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
   <script type="module">
     import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs';
 
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';
 
-    const container = document.getElementById('pdf-container');
-    const loading = document.getElementById('pdf-loading');
+    async function renderPDF() {
+      const container = document.getElementById('pdf-container');
+      const loading = document.getElementById('pdf-loading');
 
-    const pdf = await pdfjsLib.getDocument('assets/rise-and-shine.pdf').promise;
-    loading.remove();
+      try {
+        const pdf = await pdfjsLib.getDocument('assets/rise-and-shine.pdf').promise;
+        loading.remove();
 
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
-      const scale = 2.5;
-      const viewport = page.getViewport({ scale });
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const scale = 2.5;
+          const viewport = page.getViewport({ scale });
 
-      const canvas = document.createElement('canvas');
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      container.appendChild(canvas);
+          const canvas = document.createElement('canvas');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          container.appendChild(canvas);
 
-      await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+          await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+        }
+      } catch (err) {
+        loading.textContent = 'Failed to load case study: ' + err.message;
+      }
     }
+
+    renderPDF();
   </script>
 
 </body>
