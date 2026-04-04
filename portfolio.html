@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jade Riedlkovacs – UX/UI Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #101828;
+    }
+
+    /* ── Nav ─────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 40px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo img { width: 40px; height: 40px; }
+
+    .btn-contact {
+      background: #c3acda;
+      color: #101828;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 24px;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: -0.2px;
+      transition: background 0.15s;
+    }
+
+    .btn-contact:hover { background: #b49cce; }
+
+    /* ── Hero ────────────────────────────────────────── */
+    .hero {
+      padding: 56px 60px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .hero-avatar {
+      position: relative;
+      flex-shrink: 0;
+      width: 220px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      width: 220px;
+      height: 296px;
+    }
+
+    .avatar-wrap img.blob {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 218px;
+      height: 293px;
+    }
+
+    .avatar-wrap img.portrait {
+      position: absolute;
+      top: 11px;
+      left: 10px;
+      width: 216px;
+      height: 291px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .avatar-wrap .deco-star {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 52px;
+      height: 52px;
+      transform: rotate(46.74deg);
+    }
+
+    .avatar-wrap .deco-sparkle {
+      position: absolute;
+      bottom: -42px;
+      right: -4px;
+      width: 18px;
+      height: 18px;
+      transform: rotate(78.2deg);
+    }
+
+    .hero-body {
+      flex: 1;
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+    }
+
+    .hero-left { flex: 1; min-width: 0; }
+
+    .hero-title {
+      font-size: 40px;
+      font-weight: 700;
+      color: #101828;
+      letter-spacing: 0.35px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .hero-bio {
+      font-size: 20px;
+      font-weight: 400;
+      color: #4a5565;
+      line-height: 1.65;
+      letter-spacing: -0.31px;
+      max-width: 560px;
+    }
+
+    .hero-bio + .hero-bio { margin-top: 14px; }
+
+    .hero-divider {
+      width: 1px;
+      background: #e5e7eb;
+      align-self: stretch;
+      flex-shrink: 0;
+    }
+
+    .hero-right {
+      flex: 0 0 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .hero-bio-right {
+      font-size: 20px;
+      font-weight: 400;
+      color: #4a5565;
+      line-height: 1.65;
+      letter-spacing: -0.31px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tag {
+      background: #f3f4f6;
+      color: #364153;
+      font-size: 15px;
+      font-weight: 400;
+      padding: 10px 18px;
+      border-radius: 9999px;
+      letter-spacing: -0.15px;
+      white-space: nowrap;
+    }
+
+    /* ── Projects ────────────────────────────────────── */
+    .projects {
+      margin: 60px 0 0;
+      background: #f8f2ff;
+      border-radius: 30px 30px 0 0;
+      box-shadow: 0 -4px 10px rgba(140, 140, 140, 0.25);
+      padding: 40px 60px 48px;
+    }
+
+    .projects-inner {
+      max-width: 1480px;
+      margin: 0 auto;
+    }
+
+    .projects-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #101828;
+      letter-spacing: 0.4px;
+      margin-bottom: 32px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .project-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .project-thumb {
+      height: 210px;
+      overflow: hidden;
+      background: #f3f4f6;
+      flex-shrink: 0;
+    }
+
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-info {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .project-name {
+      font-size: 20px;
+      font-weight: 500;
+      color: #101828;
+      letter-spacing: -0.45px;
+    }
+
+    .project-desc {
+      font-size: 16px;
+      color: #4a5565;
+      line-height: 1.6;
+      letter-spacing: -0.31px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .project-tag {
+      background: #f3f4f6;
+      color: #364153;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 7px 14px;
+      border-radius: 9999px;
+      letter-spacing: -0.15px;
+    }
+
+    /* ── Footer ──────────────────────────────────────── */
+    .footer {
+      padding: 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .footer-heading {
+      font-size: 20px;
+      font-weight: 500;
+      color: #101828;
+      margin-bottom: 6px;
+      letter-spacing: -0.45px;
+    }
+
+    .footer-sub {
+      font-size: 17px;
+      color: #4a5565;
+      letter-spacing: -0.31px;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-email {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      color: #364153;
+      text-decoration: none;
+      letter-spacing: -0.31px;
+      transition: color 0.15s;
+    }
+
+    .footer-email:hover { color: #101828; }
+    .footer-email img { width: 22px; height: 22px; }
+
+    .footer-social {
+      width: 38px;
+      height: 38px;
+      background: #e5e7eb;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .footer-social:hover { background: #d1d5db; }
+    .footer-social img { width: 18px; height: 18px; }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .hero-right { flex: 0 0 340px; }
+    }
+
+    @media (max-width: 860px) {
+      .nav { padding: 0 24px; }
+      .hero { flex-direction: column; padding: 32px 24px 0; gap: 32px; }
+      .hero-avatar { width: 180px; }
+      .avatar-wrap { width: 180px; height: 240px; }
+      .avatar-wrap img.blob { width: 178px; height: 238px; }
+      .avatar-wrap img.portrait { width: 176px; height: 237px; }
+      .hero-body { flex-direction: column; }
+      .hero-divider { display: none; }
+      .hero-right { flex: none; width: 100%; }
+      .projects { padding: 32px 24px 40px; }
+      .projects-grid { grid-template-columns: 1fr; gap: 20px; }
+      .footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title { font-size: 32px; }
+      .hero-bio, .hero-bio-right { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-logo">
+      <img src="assets/icon-home.svg" alt="Home" />
+    </div>
+    <a href="mailto:riedlkovacsj@gmail.com" class="btn-contact">Contact</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-avatar">
+      <div class="avatar-wrap">
+        <img class="blob" src="assets/profile-circle.svg" alt="" aria-hidden="true" />
+        <img class="portrait" src="assets/profile-overlay.png" alt="Jade Riedlkovacs" />
+        <img class="deco-star" src="assets/deco-star.svg" alt="" aria-hidden="true" />
+        <img class="deco-sparkle" src="assets/deco-sparkle.svg" alt="" aria-hidden="true" />
+      </div>
+    </div>
+
+    <div class="hero-body">
+      <div class="hero-left">
+        <h1 class="hero-title">Hi, I'm Jade</h1>
+        <p class="hero-bio">A junior UX/UI designer with a background in computer engineering. I approach design from both sides — I care about how things feel to use, and I understand how they get built.</p>
+        <p class="hero-bio">I've worked on early-stage research, concept design, and UI across mobile and web products.</p>
+      </div>
+
+      <div class="hero-divider"></div>
+
+      <div class="hero-right">
+        <p class="hero-bio-right">Based in Budapest. Outside of design I read a lot, crochet, and spend more time on puzzles and video games than I probably should.</p>
+        <div class="tags">
+          <span class="tag">Prototyping</span>
+          <span class="tag">User Research</span>
+          <span class="tag">UX/UI Design</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="projects">
+    <div class="projects-inner">
+      <h2 class="projects-title">Featured Projects</h2>
+      <div class="projects-grid">
+
+        <a class="project-card" href="rise-and-shine.html">
+          <div class="project-thumb">
+            <img src="assets/project-riseshine.png" alt="Rise&amp;Shine app mockup" />
+          </div>
+          <div class="project-info">
+            <div class="project-name">Rise&amp;Shine</div>
+            <div class="project-desc">Bringing alarms, weather, and daily tasks into one calm morning experience.</div>
+            <div class="project-tags">
+              <span class="project-tag">Mobile</span>
+              <span class="project-tag">UX/UI</span>
+              <span class="project-tag">User Research</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="project-card" href="index.html">
+          <div class="project-thumb">
+            <img src="assets/project-brandbrain.png" alt="Brand Brain project" />
+          </div>
+          <div class="project-info">
+            <div class="project-name">Brand Brain</div>
+            <div class="project-desc">Exploring how AI could help marketers maintain consistent brand communication.</div>
+            <div class="project-tags">
+              <span class="project-tag">AI</span>
+              <span class="project-tag">Design Concept</span>
+              <span class="project-tag">Research</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="project-card" href="#">
+          <div class="project-thumb">
+            <img src="assets/project-brandbrain.png" alt="Intelligent Channel Selector project" />
+          </div>
+          <div class="project-info">
+            <div class="project-name">Intelligent Channel Selector</div>
+            <div class="project-desc">Researching how AI could match each customer to their most effective communication channel.</div>
+            <div class="project-tags">
+              <span class="project-tag">AI</span>
+              <span class="project-tag">Research</span>
+              <span class="project-tag">Insight</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      <div class="footer-heading">Let's Connect</div>
+      <div class="footer-sub">Always open to new opportunities and collaborations</div>
+    </div>
+    <div class="footer-links">
+      <a class="footer-email" href="mailto:riedlkovacsj@gmail.com">
+        <img src="assets/icon-email.svg" alt="" aria-hidden="true" />
+        riedlkovacsj@gmail.com
+      </a>
+      <a class="footer-social" href="#" title="LinkedIn" aria-label="LinkedIn">
+        <img src="assets/icon-linkedin.svg" alt="LinkedIn" />
+      </a>
+      <a class="footer-social" href="#" title="Social" aria-label="Social">
+        <img src="assets/icon-social.svg" alt="Social" />
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>

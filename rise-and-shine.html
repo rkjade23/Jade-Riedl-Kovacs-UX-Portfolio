@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rise&amp;Shine – Case Study · Jade Riedlkovacs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #101828;
+    }
+
+    /* ── Nav ─────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 40px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .nav-logo svg { width: 32px; height: 32px; }
+
+    .btn-contact {
+      background: #c3acda;
+      color: #101828;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 24px;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: -0.2px;
+      transition: background 0.15s;
+    }
+
+    .btn-contact:hover { background: #b49cce; }
+
+    /* ── Page Hero ─────────────────────────────────── */
+    .case-hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 72px 60px 56px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      color: #6b7280;
+      text-decoration: none;
+      margin-bottom: 48px;
+      letter-spacing: -0.15px;
+      transition: color 0.15s;
+    }
+
+    .back-link:hover { color: #101828; }
+
+    .back-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .case-title {
+      font-size: 52px;
+      font-weight: 700;
+      color: #101828;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      margin-bottom: 0;
+    }
+
+    /* ── Content ──────────────────────────────────── */
+    .case-body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 60px 80px;
+    }
+
+    /* Section spacing */
+    .section {
+      margin-bottom: 72px;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9747ff;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 30px;
+      font-weight: 700;
+      color: #101828;
+      letter-spacing: -0.3px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Overview ─────────────────────────────────── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 32px;
+    }
+
+    .body-text {
+      font-size: 18px;
+      color: #4a5565;
+      line-height: 1.7;
+      letter-spacing: -0.2px;
+    }
+
+    /* ── Problem / Goals ─────────────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .problem-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .problem-card {
+      background: #f8f2ff;
+      border-radius: 14px;
+      padding: 24px 28px;
+    }
+
+    .problem-card p {
+      font-size: 17px;
+      color: #364153;
+      line-height: 1.6;
+      letter-spacing: -0.2px;
+    }
+
+    .goals-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .goal-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .goal-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #9747ff;
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    .goal-item p {
+      font-size: 17px;
+      color: #4a5565;
+      line-height: 1.6;
+      letter-spacing: -0.2px;
+    }
+
+    /* ── Persona ──────────────────────────────────── */
+    .persona-card {
+      background: #f8f2ff;
+      border-radius: 20px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .persona-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .persona-avatar {
+      width: 80px;
+      height: 80px;
+      background: #c3acda;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .persona-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .persona-stat-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #9747ff;
+    }
+
+    .persona-stat-value {
+      font-size: 17px;
+      color: #101828;
+      letter-spacing: -0.2px;
+    }
+
+    .persona-details {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .persona-quote {
+      font-size: 20px;
+      font-style: italic;
+      color: #364153;
+      line-height: 1.55;
+      letter-spacing: -0.2px;
+      padding-left: 20px;
+      border-left: 3px solid #c3acda;
+    }
+
+    .persona-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #9747ff;
+      margin-bottom: 8px;
+    }
+
+    .persona-text {
+      font-size: 16px;
+      color: #4a5565;
+      line-height: 1.65;
+      letter-spacing: -0.2px;
+    }
+
+    .persona-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    /* ── Divider ──────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 0 0 72px;
+    }
+
+    /* ── Research section ────────────────────────── */
+    .research-intro {
+      font-size: 18px;
+      color: #4a5565;
+      line-height: 1.7;
+      letter-spacing: -0.2px;
+      margin-bottom: 40px;
+      max-width: 840px;
+    }
+
+    /* ── Design section ──────────────────────────── */
+    .design-principles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .design-principle {
+      background: #f8f2ff;
+      border-radius: 14px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .design-principle-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #9747ff;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .design-principle p {
+      font-size: 16px;
+      color: #364153;
+      line-height: 1.6;
+      letter-spacing: -0.15px;
+    }
+
+    /* ── App screens showcase ────────────────────── */
+    .screens-section {
+      background: #f8f2ff;
+      border-radius: 24px;
+      padding: 48px;
+      margin-bottom: 72px;
+    }
+
+    .screens-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #101828;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+
+    .screens-desc {
+      font-size: 16px;
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .screen-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .screen-mockup {
+      background: linear-gradient(145deg, #e8d8f7 0%, #d4bfed 100%);
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .phone-frame {
+      width: 120px;
+      height: 240px;
+      background: #1a1a2e;
+      border-radius: 20px;
+      border: 3px solid #333;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 8px 6px 6px;
+      position: relative;
+    }
+
+    .phone-notch {
+      width: 40px;
+      height: 6px;
+      background: #000;
+      border-radius: 3px;
+      margin: 0 auto 6px;
+    }
+
+    .phone-screen {
+      flex: 1;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .phone-screen.alarm {
+      background: linear-gradient(180deg, #2d1b69 0%, #6b21a8 50%, #1a0a3a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .phone-time {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .phone-label {
+      font-size: 8px;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .phone-screen.weather {
+      background: linear-gradient(180deg, #7c3aed 0%, #4c1d95 100%);
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      gap: 4px;
+    }
+
+    .weather-temp {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .weather-detail {
+      font-size: 7px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .phone-screen.tasks {
+      background: #f9fafb;
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      gap: 4px;
+    }
+
+    .task-row {
+      height: 10px;
+      background: #e5e7eb;
+      border-radius: 3px;
+    }
+
+    .task-row.checked { background: #c3acda; }
+
+    .phone-screen.ai {
+      background: linear-gradient(180deg, #1a0a3a 0%, #2d1b69 100%);
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      gap: 5px;
+      align-items: flex-start;
+    }
+
+    .ai-chip {
+      height: 12px;
+      border-radius: 6px;
+      background: rgba(195, 172, 218, 0.4);
+    }
+
+    .screen-label {
+      padding: 14px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #364153;
+      letter-spacing: -0.15px;
+    }
+
+    /* ── Wireframe section ───────────────────────── */
+    .wireframe-section {
+      margin-bottom: 72px;
+    }
+
+    .wireframe-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .wireframe-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .wireframe-visual {
+      background: #f3f4f6;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .wireframe-phone {
+      width: 80px;
+      height: 148px;
+      background: #fff;
+      border-radius: 12px;
+      border: 2px solid #d1d5db;
+      overflow: hidden;
+      padding: 6px 4px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .wf-bar {
+      height: 6px;
+      background: #e5e7eb;
+      border-radius: 2px;
+    }
+
+    .wf-bar.dark { background: #9ca3af; }
+    .wf-bar.short { width: 60%; }
+    .wf-bar.medium { width: 80%; }
+
+    .wireframe-caption {
+      padding: 14px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #4a5565;
+      letter-spacing: -0.15px;
+    }
+
+    /* ── Key decisions ───────────────────────────── */
+    .decisions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .decision-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .decision-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #101828;
+      letter-spacing: -0.2px;
+      margin-bottom: 10px;
+    }
+
+    .decision-text {
+      font-size: 15px;
+      color: #4a5565;
+      line-height: 1.65;
+      letter-spacing: -0.15px;
+    }
+
+    /* ── Reflection ──────────────────────────────── */
+    .reflection-card {
+      background: #f8f2ff;
+      border-radius: 20px;
+      padding: 48px;
+    }
+
+    .reflection-card .body-text {
+      max-width: 760px;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    .footer {
+      padding: 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .footer-heading {
+      font-size: 20px;
+      font-weight: 500;
+      color: #101828;
+      margin-bottom: 6px;
+      letter-spacing: -0.45px;
+    }
+
+    .footer-sub {
+      font-size: 17px;
+      color: #4a5565;
+      letter-spacing: -0.31px;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-email {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      color: #364153;
+      text-decoration: none;
+      letter-spacing: -0.31px;
+      transition: color 0.15s;
+    }
+
+    .footer-email:hover { color: #101828; }
+
+    .footer-social {
+      width: 38px;
+      height: 38px;
+      background: #e5e7eb;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .footer-social:hover { background: #d1d5db; }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav { padding: 0 24px; }
+      .case-hero { padding: 48px 24px 36px; }
+      .case-title { font-size: 36px; }
+      .case-body { padding: 0 24px 60px; }
+      .overview-grid, .two-col, .persona-card { grid-template-columns: 1fr; gap: 32px; }
+      .screens-grid { grid-template-columns: repeat(2, 1fr); }
+      .wireframe-grid { grid-template-columns: 1fr 1fr; }
+      .decisions-grid { grid-template-columns: 1fr; }
+      .screens-section { padding: 32px 24px; }
+      .reflection-card { padding: 32px 24px; }
+      .footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+      .design-principles { grid-template-columns: 1fr; }
+      .persona-cols { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .screens-grid { grid-template-columns: 1fr 1fr; }
+      .wireframe-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="portfolio.html" class="nav-logo" aria-label="Back to home">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 4L4 14V28H12V20H20V28H28V14L16 4Z" fill="#101828"/>
+      </svg>
+    </a>
+    <a href="mailto:riedlkovacsj@gmail.com" class="btn-contact">Contact</a>
+  </nav>
+
+  <!-- Page Hero -->
+  <header class="case-hero">
+    <a href="portfolio.html" class="back-link">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back to portfolio
+    </a>
+    <h1 class="case-title">Rise&amp;Shine</h1>
+  </header>
+
+  <!-- Case Study Body -->
+  <main class="case-body">
+
+    <!-- Overview -->
+    <section class="section">
+      <div class="section-label">Overview</div>
+      <div class="overview-grid">
+        <p class="body-text">Rise&amp;Shine is a smart alarm app concept created for a university assignment focused on improving morning routines. The project explored how combining alarms with essential morning information, such as weather and reminders, could help users start their day with more clarity and less stress.</p>
+        <p class="body-text">In this project, I collaborated with two other students and contributed to user interviews, early sketching, wireframing, UI design, and lightweight testing. As my first UX design experience, Rise&amp;Shine taught me essential skills in conducting early discovery, organizing research findings, planning design directions, and creating initial interface concepts.</p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Problem & Goals -->
+    <section class="section">
+      <div class="two-col">
+        <div>
+          <div class="section-title">Problem statement</div>
+          <div class="problem-cards">
+            <div class="problem-card">
+              <p>Most alarm apps focus only on basic functionality, offering little support for the overall morning routine.</p>
+            </div>
+            <div class="problem-card">
+              <p>Users often feel rushed or stressed when starting their day.</p>
+            </div>
+            <div class="problem-card">
+              <p>Relevant information (weather, reminders, commute details) is fragmented across multiple apps.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-title">Project Goals</div>
+          <div class="goals-list">
+            <div class="goal-item">
+              <div class="goal-dot"></div>
+              <p>Support a calmer and more organized start to the day.</p>
+            </div>
+            <div class="goal-item">
+              <div class="goal-dot"></div>
+              <p>Create an interface that feels intuitive, minimal, and easy to use first thing in the morning.</p>
+            </div>
+            <div class="goal-item">
+              <div class="goal-dot"></div>
+              <p>Explore how personalization can help users prepare for their day most effectively.</p>
+            </div>
+            <div class="goal-item">
+              <div class="goal-dot"></div>
+              <p>Bring essential morning information into one unified experience.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Persona -->
+    <section class="section">
+      <div class="section-label">Research</div>
+      <div class="section-title">Persona</div>
+      <p class="research-intro">After defining the key insights, we developed a persona that represents the most common patterns, motivations, and behaviors observed during the research. This helped ground our design decisions in the needs of a realistic user rather than assumptions.</p>
+      <div class="persona-card">
+        <div class="persona-meta">
+          <div class="persona-avatar">A</div>
+          <div class="persona-stat">
+            <span class="persona-stat-label">Name</span>
+            <span class="persona-stat-value">Anna</span>
+          </div>
+          <div class="persona-stat">
+            <span class="persona-stat-label">Age</span>
+            <span class="persona-stat-value">23</span>
+          </div>
+          <div class="persona-stat">
+            <span class="persona-stat-label">Occupation</span>
+            <span class="persona-stat-value">Student, intern</span>
+          </div>
+        </div>
+        <div class="persona-details">
+          <blockquote class="persona-quote">"If my morning starts calmly, my whole day feels better... I just don't want to think too much right after waking up."</blockquote>
+          <div>
+            <div class="persona-section-title">About</div>
+            <p class="persona-text">Anna is a university student who tends to go to bed late and wake up early, often leaving many tasks for the morning. She relies heavily on her phone to organize her day and prefers a gentle, predictable start rather than rushing immediately after waking up.</p>
+          </div>
+          <div class="persona-cols">
+            <div>
+              <div class="persona-section-title">Needs</div>
+              <p class="persona-text">She needs a gentle, low‑effort wake‑up experience paired with a single, unified space where she can see the most important morning details. Clear, simple guidance helps her feel more grounded when she starts her day.</p>
+            </div>
+            <div>
+              <div class="persona-section-title">Goals</div>
+              <p class="persona-text">Wants to start her mornings calmly and feel more in control of her routine. She aims to quickly access essential information — such as weather, news, and reminders — without jumping between multiple apps.</p>
+            </div>
+            <div>
+              <div class="persona-section-title">Frustrations</div>
+              <p class="persona-text">She often uses multiple snoozes, which makes her mornings feel disorganized. Moving between different apps for basic information takes extra time and adds unnecessary friction to the first minutes of her day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Design Direction -->
+    <section class="section">
+      <div class="section-label">Design</div>
+      <div class="section-title">Design principles</div>
+      <p class="research-intro">To translate the user's needs into a structured interaction, I mapped the two core flows that occur inside the app: setting an alarm and starting the morning after waking up. These flows helped clarify how the experience should stay simple and low-effort.</p>
+      <div class="design-principles">
+        <div class="design-principle">
+          <div class="design-principle-dot"></div>
+          <p>Create a dismissal interaction with the right level of friction — hard enough to fully wake up, easy enough not to frustrate.</p>
+        </div>
+        <div class="design-principle">
+          <div class="design-principle-dot"></div>
+          <p>Prioritize simplicity and reduce cognitive load for users who are just waking up.</p>
+        </div>
+        <div class="design-principle">
+          <div class="design-principle-dot"></div>
+          <p>Integrate essential morning info into one clean overview — weather, tasks, and commute at a glance.</p>
+        </div>
+        <div class="design-principle">
+          <div class="design-principle-dot"></div>
+          <p>Support morning routines with structured and easy-to-follow checklists.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Final Design Screens -->
+    <div class="screens-section">
+      <div class="screens-title">Final Design</div>
+      <p class="screens-desc">Four core screens covering the complete morning experience — alarm dismissal, weather overview, daily tasks, and AI-powered morning tips.</p>
+      <div class="screens-grid">
+        <div class="screen-card">
+          <div class="screen-mockup">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen alarm">
+                <div class="phone-time">7:30</div>
+                <div class="phone-label">Drag to dismiss</div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-label">Alarm screen</div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-mockup">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen weather">
+                <div class="weather-temp">18°</div>
+                <div class="weather-detail">Budapest · 2025.03.18</div>
+                <div style="margin-top:6px; display:flex; flex-direction:column; gap:3px;">
+                  <div style="height:6px; background:rgba(255,255,255,0.2); border-radius:2px;"></div>
+                  <div style="height:6px; background:rgba(255,255,255,0.2); border-radius:2px; width:70%;"></div>
+                  <div style="height:6px; background:rgba(255,255,255,0.2); border-radius:2px; width:50%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-label">Weather overview</div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-mockup">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen tasks">
+                <div class="wf-bar dark short" style="margin-bottom:4px;"></div>
+                <div class="task-row checked"></div>
+                <div class="task-row"></div>
+                <div class="task-row checked"></div>
+                <div class="task-row"></div>
+                <div class="task-row"></div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-label">Morning checklist</div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-mockup">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen ai">
+                <div class="ai-chip" style="width:70px;"></div>
+                <div class="ai-chip" style="width:90px;"></div>
+                <div class="ai-chip" style="width:60px;"></div>
+                <div class="ai-chip" style="width:80px;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-label">AI morning tips</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Design Decisions -->
+    <section class="section">
+      <div class="section-title">Key design decisions</div>
+      <div class="decisions-grid">
+        <div class="decision-card">
+          <div class="decision-title">Drag-and-drop alarm dismissal</div>
+          <p class="decision-text">The drag button changes position with each alarm to ensure the user is fully awake before dismissing — adding the right amount of intentional friction to prevent accidental snoozing.</p>
+        </div>
+        <div class="decision-card">
+          <div class="decision-title">Weekday vs. weekend task separation</div>
+          <p class="decision-text">Different task lists for weekdays and weekends allow users to maintain distinct routines without cluttering a single shared list, supporting a more personalized and organized experience.</p>
+        </div>
+        <div class="decision-card">
+          <div class="decision-title">Unified morning overview</div>
+          <p class="decision-text">Weather, forecast, activity conditions, and reminders are brought together in one screen — removing the need to switch between apps in the first groggy minutes of the day.</p>
+        </div>
+        <div class="decision-card">
+          <div class="decision-title">Personalized AI tips</div>
+          <p class="decision-text">Users can select morning tip categories (clothing, coffee, commute, podcasts) and even use voice input — making the experience feel tailored without requiring much effort to set up.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Reflection -->
+    <section class="section">
+      <div class="section-label">Reflection</div>
+      <div class="reflection-card">
+        <div class="section-title">What I learned</div>
+        <p class="body-text">Rise&amp;Shine was my first real UX project, and it shaped how I think about design. Talking to users early — before touching the interface — showed me how different real needs are from assumptions. I learned that good UX isn't about adding features; it's about removing friction in the moments that matter most.<br><br>Working with a team also taught me how to communicate design reasoning, align on direction, and iterate together. The experience gave me a foundation I've built on in every project since.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      <div class="footer-heading">Let's Connect</div>
+      <div class="footer-sub">Always open to new opportunities and collaborations</div>
+    </div>
+    <div class="footer-links">
+      <a class="footer-email" href="mailto:riedlkovacsj@gmail.com">
+        riedlkovacsj@gmail.com
+      </a>
+      <a class="footer-social" href="#" title="LinkedIn" aria-label="LinkedIn">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.5 6H2V16H4.5V6ZM3.25 5C4.08 5 4.75 4.33 4.75 3.5C4.75 2.67 4.08 2 3.25 2C2.42 2 1.75 2.67 1.75 3.5C1.75 4.33 2.42 5 3.25 5ZM16 16H13.5V11C13.5 9.9 12.6 9 11.5 9C10.4 9 9.5 9.9 9.5 11V16H7V6H9.5V7.3C10.1 6.5 11.1 6 12.25 6C14.32 6 16 7.68 16 9.75V16Z" fill="#364153"/>
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
