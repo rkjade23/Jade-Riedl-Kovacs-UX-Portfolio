@@ -10,17 +10,16 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #ffffff;
+      background: #f8f2ff;
       color: #101828;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
     }
 
     /* ── Nav ─────────────────────────────────────────── */
     .nav {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(10px);
@@ -60,59 +59,30 @@
 
     .btn-contact:hover { background: #b49cce; }
 
-    /* ── PDF Viewer ──────────────────────────────────── */
-    .pdf-wrapper {
-      flex: 1;
-      display: flex;
-      padding: 40px 60px;
-      background: #f8f2ff;
-    }
-
-    .pdf-embed {
-      width: 100%;
-      height: calc(100vh - 72px - 80px - 80px);
-      min-height: 600px;
-      border: none;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-      display: block;
-    }
-
-    .pdf-fallback {
-      width: 100%;
+    /* ── PDF Pages ───────────────────────────────────── */
+    .pdf-container {
+      margin-top: 72px;
+      padding: 40px 0 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 16px;
+      gap: 0;
+    }
+
+    .pdf-container canvas {
+      display: block;
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+    }
+
+    .pdf-loading {
+      margin-top: 72px;
       padding: 80px 40px;
       text-align: center;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-    }
-
-    .pdf-fallback p {
       font-size: 17px;
       color: #4a5565;
-      line-height: 1.6;
     }
-
-    .btn-download {
-      background: #a179d7;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      border: none;
-      border-radius: 10px;
-      padding: 12px 28px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.15s;
-    }
-
-    .btn-download:hover { background: #8f65c8; }
 
     /* ── Footer ──────────────────────────────────────── */
     .footer {
@@ -176,10 +146,9 @@
     .footer-social:hover { background: #d1d5db; }
     .footer-social img { width: 18px; height: 18px; }
 
-    /* ── Responsive ──────────────────────────────────── */
     @media (max-width: 860px) {
       .nav { padding: 0 24px; }
-      .pdf-wrapper { padding: 24px; }
+      .pdf-container { padding-top: 24px; }
       .footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
     }
   </style>
@@ -194,18 +163,9 @@
     <a href="mailto:riedlkovacsj@gmail.com" class="btn-contact">Contact</a>
   </nav>
 
-  <!-- PDF Viewer -->
-  <div class="pdf-wrapper">
-    <object
-      class="pdf-embed"
-      data="assets/rise-and-shine.pdf"
-      type="application/pdf"
-    >
-      <div class="pdf-fallback">
-        <p>Your browser doesn't support inline PDFs.<br>Click below to open the case study.</p>
-        <a class="btn-download" href="assets/rise-and-shine.pdf" target="_blank">Open PDF</a>
-      </div>
-    </object>
+  <!-- PDF rendered as canvases -->
+  <div class="pdf-container" id="pdf-container">
+    <p class="pdf-loading" id="pdf-loading">Loading case study…</p>
   </div>
 
   <!-- Footer -->
@@ -227,6 +187,33 @@
       </a>
     </div>
   </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+  <script type="module">
+    import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs';
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';
+
+    const container = document.getElementById('pdf-container');
+    const loading = document.getElementById('pdf-loading');
+
+    const pdf = await pdfjsLib.getDocument('assets/rise-and-shine.pdf').promise;
+    loading.remove();
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const scale = 2.5;
+      const viewport = page.getViewport({ scale });
+
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      container.appendChild(canvas);
+
+      await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+    }
+  </script>
 
 </body>
 </html>
