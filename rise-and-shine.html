@@ -10,18 +10,16 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #f8f2ff;
+      background: #ffffff;
       color: #101828;
     }
 
-    /* ── Nav ─────────────────────────────────────────── */
+    /* ── Nav ──────────────────────────────────── */
     .nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255,255,255,0.85);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid #e5e7eb;
@@ -32,14 +30,7 @@
       justify-content: space-between;
     }
 
-    .nav-logo {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
+    .nav-logo { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
     .nav-logo img { width: 40px; height: 40px; }
 
     .btn-contact {
@@ -56,35 +47,24 @@
       letter-spacing: -0.2px;
       transition: background 0.15s;
     }
-
     .btn-contact:hover { background: #b49cce; }
 
-    /* ── PDF Pages ───────────────────────────────────── */
-    .pdf-container {
+    /* ── Case study image ──────────────────────── */
+    .cs-wrap {
       margin-top: 72px;
-      padding: 40px 0 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
+      padding: 40px 60px;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .pdf-container canvas {
-      display: block;
+    .cs-wrap img {
       width: 100%;
-      max-width: 900px;
       height: auto;
+      display: block;
     }
 
-    .pdf-loading {
-      margin-top: 72px;
-      padding: 80px 40px;
-      text-align: center;
-      font-size: 17px;
-      color: #4a5565;
-    }
-
-    /* ── Footer ──────────────────────────────────────── */
+    /* ── Footer ──────────────────────────────────── */
     .footer {
       padding: 40px 60px;
       display: flex;
@@ -94,7 +74,7 @@
       gap: 24px;
       max-width: 1600px;
       margin: 0 auto;
-      width: 100%;
+      border-top: 1px solid #e5e7eb;
     }
 
     .footer-heading {
@@ -148,7 +128,7 @@
 
     @media (max-width: 860px) {
       .nav { padding: 0 24px; }
-      .pdf-container { padding-top: 24px; }
+      .cs-wrap { padding: 24px 16px; }
       .footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
     }
   </style>
@@ -157,15 +137,15 @@
 
   <!-- Nav -->
   <nav class="nav">
-    <a href="index.html" class="nav-logo">
+    <a class="nav-logo" href="index.html">
       <img src="assets/icon-home.svg" alt="Home" />
     </a>
     <a href="mailto:riedlkovacsj@gmail.com" class="btn-contact">Contact</a>
   </nav>
 
-  <!-- PDF rendered as canvases -->
-  <div class="pdf-container" id="pdf-container">
-    <p class="pdf-loading" id="pdf-loading">Loading case study…</p>
+  <!-- Case Study -->
+  <div class="cs-wrap" style="margin-top: 72px;">
+    <img src="assets/rise-and-shine-cs.jpg" alt="Rise and Shine case study" />
   </div>
 
   <!-- Footer -->
@@ -187,40 +167,6 @@
       </a>
     </div>
   </footer>
-
-  <script type="module">
-    import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs';
-
-    pdfjsLib.GlobalWorkerOptions.workerSrc =
-      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';
-
-    async function renderPDF() {
-      const container = document.getElementById('pdf-container');
-      const loading = document.getElementById('pdf-loading');
-
-      try {
-        const pdf = await pdfjsLib.getDocument('assets/rise-and-shine.pdf').promise;
-        loading.remove();
-
-        for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i);
-          const scale = 2.5;
-          const viewport = page.getViewport({ scale });
-
-          const canvas = document.createElement('canvas');
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
-          container.appendChild(canvas);
-
-          await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-        }
-      } catch (err) {
-        loading.textContent = 'Failed to load case study: ' + err.message;
-      }
-    }
-
-    renderPDF();
-  </script>
 
 </body>
 </html>
