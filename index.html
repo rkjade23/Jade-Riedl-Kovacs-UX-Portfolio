@@ -223,11 +223,36 @@
       display: flex;
       flex-direction: column;
       transition: box-shadow 0.15s, transform 0.15s;
+      position: relative;
     }
 
     .project-card:hover {
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
       transform: translateY(-2px);
+    }
+
+    .card-lock-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(180, 180, 180, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+      border-radius: 16px;
+      z-index: 2;
+    }
+
+    .protected-card:hover .card-lock-overlay {
+      opacity: 1;
+    }
+
+    .card-lock-overlay svg {
+      width: 48px;
+      height: 48px;
+      color: #fff;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
     }
 
     .project-thumb {
@@ -433,6 +458,9 @@
         </a>
 
         <a class="project-card protected-card" href="#" data-dest="index.html">
+          <div class="card-lock-overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
           <div class="project-thumb">
             <img src="assets/project-brandbrain.png" alt="Brand Brain project" />
           </div>
@@ -448,6 +476,9 @@
         </a>
 
         <a class="project-card protected-card" href="#" data-dest="#">
+          <div class="card-lock-overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
           <div class="project-thumb">
             <img src="assets/project-brandbrain.png" alt="Intelligent Channel Selector project" />
           </div>
