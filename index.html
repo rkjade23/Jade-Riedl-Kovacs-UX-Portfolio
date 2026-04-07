@@ -562,8 +562,9 @@
     function checkPassword() {
       var val = document.getElementById('pw-input').value;
       if (val === 'rkjadePortfolio') {
+        var dest = pendingDest;
         closeModal();
-        if (pendingDest && pendingDest !== '#') window.location.href = pendingDest;
+        if (dest && dest !== '#') window.location.href = dest;
       } else {
         document.getElementById('pw-error').style.display = 'block';
         document.getElementById('pw-input').value = '';
