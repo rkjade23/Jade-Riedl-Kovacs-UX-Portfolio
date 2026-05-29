@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About – Jade Riedl-Kovacs</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #101828;
+    }
+
+    /* ── Nav ──────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 40px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+    .nav-logo img { width: 40px; height: 40px; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-about {
+      color: #364153;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      text-decoration: none;
+      letter-spacing: -0.2px;
+      padding: 11px 16px;
+      border-radius: 10px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .btn-about:hover { color: #101828; background: #f3f4f6; }
+
+    .btn-contact {
+      background: #c3acda;
+      color: #101828;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 24px;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: -0.2px;
+      transition: background 0.15s;
+    }
+    .btn-contact:hover { background: #b49cce; }
+
+    /* ── About ──────────────────────────────────── */
+    .about {
+      min-height: calc(100vh - 72px - 1px);
+      display: flex;
+      align-items: center;
+      padding: 60px;
+      gap: 72px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-avatar {
+      flex-shrink: 0;
+      position: relative;
+      width: 280px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      width: 280px;
+      height: 377px;
+    }
+
+    .avatar-wrap img.blob {
+      position: absolute;
+      top: 0; left: 0;
+      width: 278px;
+      height: 374px;
+    }
+
+    .avatar-wrap img.portrait {
+      position: absolute;
+      top: 14px; left: 13px;
+      width: 276px;
+      height: 371px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .avatar-wrap .deco-star {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 52px; height: 52px;
+      transform: rotate(46.74deg);
+    }
+
+    .avatar-wrap .deco-sparkle {
+      position: absolute;
+      bottom: -34px; right: 25px;
+      width: 18px; height: 18px;
+      transform: rotate(78.2deg);
+    }
+
+    .about-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .about-title {
+      font-size: 40px;
+      font-weight: 700;
+      color: #101828;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    .about-bio {
+      font-size: 19px;
+      font-weight: 400;
+      color: #4a5565;
+      line-height: 1.7;
+      letter-spacing: -0.31px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tag {
+      background: #f3f4f6;
+      color: #364153;
+      font-size: 15px;
+      font-weight: 400;
+      padding: 10px 18px;
+      border-radius: 9999px;
+      letter-spacing: -0.15px;
+      white-space: nowrap;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    .footer {
+      padding: 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      max-width: 1600px;
+      margin: 0 auto;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .footer-heading {
+      font-size: 20px;
+      font-weight: 500;
+      color: #101828;
+      margin-bottom: 6px;
+      letter-spacing: -0.45px;
+    }
+
+    .footer-sub {
+      font-size: 17px;
+      color: #4a5565;
+      letter-spacing: -0.31px;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-email {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      color: #364153;
+      text-decoration: none;
+      letter-spacing: -0.31px;
+      transition: color 0.15s;
+    }
+
+    .footer-email:hover { color: #101828; }
+    .footer-email img { width: 22px; height: 22px; }
+
+    .footer-social {
+      width: 38px;
+      height: 38px;
+      background: #e5e7eb;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .footer-social:hover { background: #d1d5db; }
+    .footer-social img { width: 18px; height: 18px; }
+
+    @media (max-width: 860px) {
+      .nav { padding: 0 24px; }
+      .about { flex-direction: column; padding: 40px 24px; gap: 40px; align-items: flex-start; }
+      .about-avatar { width: 200px; }
+      .avatar-wrap { width: 200px; height: 269px; }
+      .avatar-wrap img.blob { width: 198px; height: 267px; }
+      .avatar-wrap img.portrait { width: 196px; height: 265px; }
+      .about-title { font-size: 32px; }
+      .footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .btn-about { display: none; }
+      .about-bio { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">
+      <img src="assets/icon-home.svg" alt="Home" />
+    </a>
+    <div class="nav-right">
+      <a href="about.html" class="btn-about">About</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=riedlkovacsj@gmail.com" target="_blank" rel="noopener" class="btn-contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- About -->
+  <section class="about">
+    <div class="about-avatar">
+      <div class="avatar-wrap">
+        <img class="blob" src="assets/profile-circle.svg" alt="" aria-hidden="true" />
+        <img class="portrait" src="assets/profile-overlay.png" alt="Jade Riedl-Kovacs" />
+        <img class="deco-star" src="assets/deco-star.svg" alt="" aria-hidden="true" />
+        <img class="deco-sparkle" src="assets/deco-sparkle.svg" alt="" aria-hidden="true" />
+      </div>
+    </div>
+
+    <div class="about-content">
+      <h1 class="about-title">Hi, I'm Jade</h1>
+      <p class="about-bio">A junior UX/UI designer with a background in computer engineering. I approach design from both sides — I care about how things feel to use, and I understand how they get built.</p>
+      <p class="about-bio">I've worked on early-stage research, concept design, and UI across mobile and web products.</p>
+      <p class="about-bio">Based in Budapest. Outside of design I read a lot, crochet, and spend more time on puzzles and video games than I probably should.</p>
+      <div class="tags">
+        <span class="tag">Prototyping</span>
+        <span class="tag">User Research</span>
+        <span class="tag">UX/UI Design</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      <div class="footer-heading">Let's Connect</div>
+      <div class="footer-sub">Always open to new opportunities and collaborations</div>
+    </div>
+    <div class="footer-links">
+      <a class="footer-email" href="mailto:riedlkovacsj@gmail.com">
+        <img src="assets/icon-email.svg" alt="" aria-hidden="true" />
+        riedlkovacsj@gmail.com
+      </a>
+      <a class="footer-social" href="https://www.linkedin.com/in/rkjade23/" title="LinkedIn" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <img src="assets/icon-linkedin.svg" alt="LinkedIn" />
+      </a>
+      <a class="footer-social" href="https://www.behance.net/jaderiedlkovacs" title="Behance" target="_blank" rel="noopener" aria-label="Social">
+        <img src="assets/icon-social.svg" alt="Social" />
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
