@@ -132,8 +132,8 @@
     }
 
     .project-card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
+      background: transparent;
+      border: none;
       border-radius: 16px;
       overflow: hidden;
       text-decoration: none;
@@ -176,7 +176,7 @@
     .project-thumb {
       height: 210px;
       overflow: hidden;
-      background: #f3f4f6;
+      background: #FAF5E9;
       flex-shrink: 0;
     }
 
@@ -185,6 +185,10 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    .project-card-featured .project-thumb img {
+      object-fit: contain;
     }
 
     .project-info {
@@ -307,7 +311,7 @@
   <!-- Nav -->
   <nav class="nav">
     <div class="nav-logo">
-      <img src="assets/icon-home.svg" alt="Home" />
+      <img src="assets/icon-star.svg" alt="Home" />
     </div>
     <div class="nav-right">
       <a href="about.html" class="btn-about">About</a>
@@ -410,7 +414,7 @@
       <p id="pw-error" style="display:none; font-size:14px; color:#e53e3e; margin-bottom:12px;">Incorrect password. Please try again.</p>
       <div style="display:flex; gap:10px; margin-top:12px;">
         <button onclick="checkPassword()"
-          style="flex:1; background:#c3acda; color:#101828; font-family:'Inter',sans-serif; font-weight:700; font-size:15px; border:none; border-radius:10px; padding:12px; cursor:pointer; transition:background 0.15s;"
+          style="flex:1; background:#BB6946; color:#fff; font-family:'Inter',sans-serif; font-weight:700; font-size:15px; border:none; border-radius:10px; padding:12px; cursor:pointer; transition:background 0.15s;"
           onmouseover="this.style.background='#a55a3a'" onmouseout="this.style.background='#BB6946'">Enter</button>
         <button onclick="closeModal()"
           style="flex:1; background:#f3f4f6; color:#364153; font-family:'Inter',sans-serif; font-weight:500; font-size:15px; border:none; border-radius:10px; padding:12px; cursor:pointer; transition:background 0.15s;"
