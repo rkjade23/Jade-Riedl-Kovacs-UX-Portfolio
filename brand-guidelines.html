@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brand Guidelines – Case Study · Jade Riedl-Kovacs</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #FAF5E9;
+      color: #101828;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250, 245, 233, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 40px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+    .nav-logo img { width: 40px; height: 40px; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-about {
+      color: #364153;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      text-decoration: none;
+      letter-spacing: -0.2px;
+      padding: 11px 16px;
+      border-radius: 10px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .btn-about:hover { color: #101828; background: #ede8dc; }
+
+    .btn-contact {
+      background: #BB6946;
+      color: #ffffff;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 24px;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: -0.2px;
+      transition: background 0.15s;
+    }
+    .btn-contact:hover { background: #a55a3a; }
+
+    .cs-wrap {
+      margin-top: 72px;
+      padding: 40px 60px;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cs-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .footer {
+      padding: 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      max-width: 1600px;
+      margin: 0 auto;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .footer-heading {
+      font-size: 20px;
+      font-weight: 500;
+      color: #101828;
+      margin-bottom: 6px;
+      letter-spacing: -0.45px;
+    }
+
+    .footer-sub {
+      font-size: 17px;
+      color: #4a5565;
+      letter-spacing: -0.31px;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-email {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      color: #364153;
+      text-decoration: none;
+      letter-spacing: -0.31px;
+      transition: color 0.15s;
+    }
+
+    .footer-email:hover { color: #101828; }
+    .footer-email img { width: 22px; height: 22px; }
+
+    .footer-social {
+      width: 38px;
+      height: 38px;
+      background: #e5e7eb;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .footer-social:hover { background: #d1d5db; }
+    .footer-social img { width: 18px; height: 18px; }
+
+    @media (max-width: 860px) {
+      .nav { padding: 0 24px; }
+      .cs-wrap { padding: 24px 16px; }
+      .footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .btn-about { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">
+      <img src="assets/icon-star.svg" alt="Home" />
+    </a>
+    <div class="nav-right">
+      <a href="about.html" class="btn-about">About</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=riedlkovacsj@gmail.com" target="_blank" rel="noopener" class="btn-contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="cs-wrap" style="margin-top: 72px;">
+    <img src="assets/bg-cs.png" alt="Brand Guidelines case study" />
+  </div>
+
+  <footer class="footer">
+    <div>
+      <div class="footer-heading">Let's Connect</div>
+      <div class="footer-sub">Always open to new opportunities and collaborations</div>
+    </div>
+    <div class="footer-links">
+      <a class="footer-email" href="mailto:riedlkovacsj@gmail.com">
+        <img src="assets/icon-email.svg" alt="" aria-hidden="true" />
+        riedlkovacsj@gmail.com
+      </a>
+      <a class="footer-social" href="https://www.linkedin.com/in/rkjade23/" title="LinkedIn" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <img src="assets/icon-linkedin.svg" alt="LinkedIn" />
+      </a>
+      <a class="footer-social" href="https://www.behance.net/jaderiedlkovacs" title="Behance" target="_blank" rel="noopener" aria-label="Social">
+        <img src="assets/icon-social.svg" alt="Social" />
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
