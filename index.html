@@ -92,30 +92,15 @@
     .hero-tiles {
       position: absolute;
       inset: 0;
-      display: grid;
       pointer-events: none;
-    }
-
-    .hero-tile {
-      background: rgba(255, 252, 245, 0.28);
-      border: 1px solid rgba(255, 255, 255, 0.55);
-      border-radius: 16px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), inset 0 -1px 0 rgba(200,185,160,0.2);
-      transform-style: preserve-3d;
-      transition: transform 0.35s ease-out, background 0.35s ease-out, box-shadow 0.35s ease-out;
-      will-change: transform;
-      position: relative;
+      filter: blur(48px);
       overflow: hidden;
     }
 
-    .hero-tile::before {
-      content: '';
+    .hero-blob {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 40%;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0));
-      border-radius: 16px 16px 0 0;
-      pointer-events: none;
+      border-radius: 50%;
+      will-change: transform;
     }
 
     .hero-title {
@@ -356,7 +341,7 @@
     .footer-social {
       width: 38px;
       height: 38px;
-      background: #ffffff;
+      background: #EDE8DC;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -365,7 +350,7 @@
       transition: background 0.15s;
     }
 
-    .footer-social:hover { background: #d1d5db; }
+    .footer-social:hover { background: #D8D0BE; }
     .footer-social img { width: 18px; height: 18px; }
 
     /* ── Responsive ──────────────────────────────────── */
@@ -398,7 +383,12 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
-    <div class="hero-tiles" id="hero-tiles"></div>
+    <div class="hero-tiles" id="hero-tiles">
+      <div class="hero-blob" id="blob0"></div>
+      <div class="hero-blob" id="blob1"></div>
+      <div class="hero-blob" id="blob2"></div>
+      <div class="hero-blob" id="blob3"></div>
+    </div>
     <h1 class="hero-title">I'm Jade Riedl-Kovács,<br>a <span class="accent">UX/UI Designer</span> based in Budapest.</h1>
   </section>
 
@@ -462,9 +452,9 @@
             <div class="project-name">Brand Guidelines</div>
             <div class="project-desc">Giving Emarsys AI a persistent brand voice — so marketers never have to prompt engineer again.</div>
             <div class="project-tags">
-              <span class="project-tag" style="background:#D4EDE0; color:#2D6B4A;">UX/UI</span>
-              <span class="project-tag" style="background:#D4EDE0; color:#2D6B4A;">B2B</span>
-              <span class="project-tag" style="background:#D4EDE0; color:#2D6B4A;">AI</span>
+              <span class="project-tag">UX/UI</span>
+              <span class="project-tag">B2B</span>
+              <span class="project-tag">AI</span>
             </div>
           </div>
         </a>
@@ -533,77 +523,75 @@
     // Tile grid
     (function() {
       var hero = document.getElementById('hero');
-      var grid = document.getElementById('hero-tiles');
       var mouse = { x: -9999, y: -9999 };
-      var TILE_SIZE = 120;
-      var GAP = 8;
-      var INFLUENCE = 280;
-      var MAX_TILT = 12;
-      var tiles = [];
 
-      function build() {
-        grid.innerHTML = '';
-        tiles = [];
-        var w = hero.offsetWidth;
-        var h = hero.offsetHeight;
-        var cols = Math.ceil(w / (TILE_SIZE + GAP)) + 1;
-        var rows = Math.ceil(h / (TILE_SIZE + GAP)) + 1;
-        grid.style.gridTemplateColumns = 'repeat(' + cols + ', ' + TILE_SIZE + 'px)';
-        grid.style.gridTemplateRows = 'repeat(' + rows + ', ' + TILE_SIZE + 'px)';
-        grid.style.gap = GAP + 'px';
-        grid.style.margin = '-' + (GAP/2) + 'px';
-        var total = cols * rows;
-        for (var i = 0; i < total; i++) {
-          var el = document.createElement('div');
-          el.className = 'hero-tile';
-          grid.appendChild(el);
-          tiles.push(el);
-        }
-      }
+      var blobs = [
+        { el: document.getElementById('blob0'), x: 25, y: 30, vx: 0.18, vy: 0.12, w: 520, h: 420, color: 'radial-gradient(ellipse, rgba(191,110,70,0.55) 0%, rgba(251,202,142,0.3) 55%, transparent 75%)' },
+        { el: document.getElementById('blob1'), x: 65, y: 60, vx: -0.14, vy: 0.19, w: 480, h: 500, color: 'radial-gradient(ellipse, rgba(111,189,146,0.5) 0%, rgba(180,230,200,0.25) 55%, transparent 75%)' },
+        { el: document.getElementById('blob2'), x: 50, y: 20, vx: 0.11, vy: -0.15, w: 440, h: 380, color: 'radial-gradient(ellipse, rgba(245,200,100,0.45) 0%, rgba(251,202,142,0.2) 55%, transparent 75%)' },
+        { el: document.getElementById('blob3'), x: 80, y: 70, vx: -0.2, vy: -0.1, w: 500, h: 460, color: 'radial-gradient(ellipse, rgba(191,110,70,0.4) 0%, rgba(111,189,146,0.25) 55%, transparent 75%)' }
+      ];
 
-      function update() {
-        var cols = Math.ceil(hero.offsetWidth / (TILE_SIZE + GAP)) + 1;
-        tiles.forEach(function(tile, i) {
-          var col = i % cols;
-          var row = Math.floor(i / cols);
-          var cx = col * (TILE_SIZE + GAP) + TILE_SIZE / 2;
-          var cy = row * (TILE_SIZE + GAP) + TILE_SIZE / 2;
-          var dx = mouse.x - cx;
-          var dy = mouse.y - cy;
-          var dist = Math.sqrt(dx*dx + dy*dy);
-          var t = Math.max(0, 1 - dist / INFLUENCE);
-          var tilt = MAX_TILT * t;
-          // tilt toward cursor
-          var rx = -(dy / (dist || 1)) * tilt;
-          var ry = (dx / (dist || 1)) * tilt;
-          tile.style.transform = t > 0.01
-            ? 'perspective(400px) rotateX('+rx+'deg) rotateY('+ry+'deg) scale('+(1 + t * 0.06)+')'
-            : '';
-          // glass: warm light shimmer near cursor
-          tile.style.background = t > 0.01
-            ? 'rgba(255, 248, 230, ' + (0.28 + t * 0.35) + ')'
-            : 'rgba(255, 252, 245, 0.28)';
-          tile.style.boxShadow = t > 0.01
-            ? 'inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -1px 0 rgba(200,185,160,0.2), 0 4px 24px rgba(245,200,100,' + (t * 0.25) + ')'
-            : 'inset 0 1px 0 rgba(255,255,255,0.6), inset 0 -1px 0 rgba(200,185,160,0.2)';
+      // init blob styles
+      blobs.forEach(function(b) {
+        b.el.style.width = b.w + 'px';
+        b.el.style.height = b.h + 'px';
+        b.el.style.background = b.color;
+      });
+
+      var mouseInfluence = { x: 0, y: 0, active: false };
+
+      function tick() {
+        var W = hero.offsetWidth;
+        var H = hero.offsetHeight;
+
+        blobs.forEach(function(b, i) {
+          // drift
+          b.x += b.vx;
+          b.y += b.vy;
+
+          // bounce off edges (in percent)
+          var pw = (b.w / W) * 50;
+          var ph = (b.h / H) * 50;
+          if (b.x < -pw || b.x > 100 + pw) b.vx *= -1;
+          if (b.y < -ph || b.y > 100 + ph) b.vy *= -1;
+
+          // cursor repulsion — blobs gently move away from cursor
+          if (mouseInfluence.active) {
+            var cx = mouseInfluence.x * 100;
+            var cy = mouseInfluence.y * 100;
+            var dx = b.x - cx;
+            var dy = b.y - cy;
+            var dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 35) {
+              var force = (35 - dist) / 35 * 0.06;
+              b.vx += (dx / (dist || 1)) * force;
+              b.vy += (dy / (dist || 1)) * force;
+              // clamp velocity
+              var speed = Math.sqrt(b.vx*b.vx + b.vy*b.vy);
+              if (speed > 0.45) { b.vx = b.vx/speed*0.45; b.vy = b.vy/speed*0.45; }
+            }
+          }
+
+          b.el.style.left = (b.x - (b.w/W)*50) + '%';
+          b.el.style.top  = (b.y - (b.h/H)*50) + '%';
         });
-        requestAnimationFrame(update);
+
+        requestAnimationFrame(tick);
       }
 
       hero.addEventListener('mousemove', function(e) {
         var rect = hero.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
+        mouseInfluence.x = (e.clientX - rect.left) / rect.width;
+        mouseInfluence.y = (e.clientY - rect.top) / rect.height;
+        mouseInfluence.active = true;
       });
 
       hero.addEventListener('mouseleave', function() {
-        mouse.x = -9999;
-        mouse.y = -9999;
+        mouseInfluence.active = false;
       });
 
-      window.addEventListener('resize', function() { build(); });
-      build();
-      update();
+      tick();
     })();
 
     var pendingDest = null;
