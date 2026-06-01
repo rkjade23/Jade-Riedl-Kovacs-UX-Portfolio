@@ -206,7 +206,7 @@
     }
 
     .project-card {
-      background: transparent;
+      background: #F5EFE0;
       border: none;
       border-radius: 16px;
       overflow: hidden;
@@ -248,7 +248,7 @@
     }
 
     .project-thumb {
-      height: 210px;
+      height: 290px;
       overflow: hidden;
       background: #FAF5E9;
       flex-shrink: 0;
@@ -273,6 +273,12 @@
       flex: 1;
     }
 
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
     .project-name {
       font-size: 20px;
       font-weight: 500;
@@ -287,21 +293,16 @@
       letter-spacing: -0.31px;
     }
 
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 4px;
-    }
-
     .project-tag {
-      background: #EDE8DC;
+      background: transparent;
+      border: 1px solid #364153;
       color: #364153;
-      font-size: 14px;
-      font-weight: 400;
-      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 12px;
       border-radius: 9999px;
-      letter-spacing: -0.15px;
     }
 
     /* ── Footer ──────────────────────────────────────── */
@@ -372,7 +373,7 @@
       .hero { padding: 40px 24px; }
       .projects { padding: 32px 24px 40px; }
       .projects-grid { grid-template-columns: 1fr; gap: 20px; }
-      .project-card-featured .project-thumb { height: 210px; }
+      .project-card-featured .project-thumb { height: 290px; }
       .footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
     }
 
@@ -442,13 +443,13 @@
             <img src="assets/mozi-m-cover.png" alt="mozi.m app mockup" />
           </div>
           <div class="project-info">
-            <div class="project-name">mozi.m — Cinemas in your pocket</div>
-            <div class="project-desc">A mobile app for Budapest's art-house cinema lovers — bringing scattered screenings together and turning solo viewers into communities.</div>
             <div class="project-tags">
               <span class="project-tag">UX/UI</span>
               <span class="project-tag">Research</span>
               <span class="project-tag">Usability Testing</span>
             </div>
+            <div class="project-name">mozi.m — Cinemas in your pocket</div>
+            <div class="project-desc">A mobile app for Budapest's art-house cinema lovers — bringing scattered screenings together and turning solo viewers into communities.</div>
           </div>
         </a>
 
@@ -460,13 +461,13 @@
             <img src="assets/bg-cover.png" alt="Brand Guidelines project" />
           </div>
           <div class="project-info">
-            <div class="project-name">Brand Guidelines</div>
-            <div class="project-desc">Giving Emarsys AI a persistent brand voice — so marketers never have to prompt engineer again.</div>
             <div class="project-tags">
               <span class="project-tag">UX/UI</span>
               <span class="project-tag">B2B</span>
               <span class="project-tag">AI</span>
             </div>
+            <div class="project-name">Brand Guidelines</div>
+            <div class="project-desc">Giving Emarsys AI a persistent brand voice — so marketers never have to prompt engineer again.</div>
           </div>
         </a>
 
@@ -475,13 +476,13 @@
             <img src="assets/project-campulse.png" alt="CamPulse project" />
           </div>
           <div class="project-info">
-            <div class="project-name">CamPulse</div>
-            <div class="project-desc">Making campus events discoverable for students lost across fragmented platforms.</div>
             <div class="project-tags">
               <span class="project-tag">Mobile</span>
               <span class="project-tag">UX/UI</span>
               <span class="project-tag">User Research</span>
             </div>
+            <div class="project-name">CamPulse</div>
+            <div class="project-desc">Making campus events discoverable for students lost across fragmented platforms.</div>
           </div>
         </a>
 
