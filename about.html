@@ -34,11 +34,7 @@
     .nav-logo { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
     .nav-logo img { width: 40px; height: 40px; }
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
 
     .btn-about {
       color: #364153;
@@ -51,7 +47,6 @@
       border-radius: 10px;
       transition: color 0.15s, background 0.15s;
     }
-
     .btn-about:hover { color: #101828; background: #ede8dc; }
 
     .btn-contact {
@@ -70,100 +65,129 @@
     }
     .btn-contact:hover { background: #57a87a; }
 
-    /* ── About ──────────────────────────────────── */
-    .about {
-      min-height: calc(100vh - 72px - 1px);
-      display: flex;
-      align-items: center;
-      padding: 60px;
-      gap: 72px;
+    /* ── About me section ──────────────────────── */
+    .about-section {
       max-width: 1200px;
       margin: 0 auto;
+      padding: 72px 60px;
+      display: flex;
+      gap: 72px;
+      align-items: flex-start;
     }
 
-    .about-avatar {
+    .about-portrait {
       flex-shrink: 0;
-      position: relative;
-      width: 280px;
+      width: 340px;
     }
 
-    .avatar-wrap {
-      position: relative;
-      display: inline-block;
-      width: 280px;
-      height: 377px;
-    }
-
-    .avatar-wrap img.blob {
-      position: absolute;
-      top: 0; left: 0;
-      width: 278px;
-      height: 374px;
-    }
-
-    .avatar-wrap img.portrait {
-      position: absolute;
-      top: 14px; left: 13px;
-      width: 276px;
-      height: 371px;
+    .about-portrait img {
+      width: 340px;
+      height: 340px;
       object-fit: cover;
       object-position: center top;
+      border-radius: 16px;
     }
 
-    .avatar-wrap .deco-star {
-      position: absolute;
-      bottom: -20px; right: -20px;
-      width: 52px; height: 52px;
-      transform: rotate(46.74deg);
-    }
-
-    .avatar-wrap .deco-sparkle {
-      position: absolute;
-      bottom: -34px; right: 25px;
-      width: 18px; height: 18px;
-      transform: rotate(78.2deg);
-    }
-
-    .about-content {
+    .about-text {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 20px;
     }
 
-    .about-title {
+    .section-title {
       font-family: 'Fraunces', serif;
-      font-size: 40px;
+      font-size: 36px;
       font-weight: 700;
       color: #101828;
       letter-spacing: -0.5px;
       line-height: 1.1;
     }
 
-    .about-bio {
-      font-size: 19px;
-      font-weight: 400;
+    .about-para {
+      font-size: 18px;
       color: #4a5565;
-      line-height: 1.7;
-      letter-spacing: -0.31px;
+      line-height: 1.75;
+      letter-spacing: -0.2px;
     }
 
-    .tags {
+    /* ── Divider ──────────────────────────────── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ── Carousel section ──────────────────────── */
+    .carousel-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 60px 80px;
+    }
+
+    .carousel-section .section-title {
+      margin-bottom: 20px;
+    }
+
+    .carousel-desc {
+      font-size: 18px;
+      color: #4a5565;
+      line-height: 1.75;
+      letter-spacing: -0.2px;
+      margin-bottom: 40px;
+      max-width: 800px;
+    }
+
+    .carousel-wrap {
+      position: relative;
+    }
+
+    .carousel-track-outer {
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .carousel-track {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+      gap: 20px;
+      transition: transform 0.4s ease;
     }
 
-    .tag {
-      background: #EDE8DC;
-      color: #364153;
-      font-size: 15px;
-      font-weight: 400;
-      padding: 10px 18px;
-      border-radius: 9999px;
-      letter-spacing: -0.15px;
-      white-space: nowrap;
+    .carousel-slide {
+      flex: 0 0 calc((100% - 40px) / 3);
     }
+
+    .carousel-slide img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: #FAF5E9;
+      border: 1px solid #e5e7eb;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+
+    .carousel-btn:hover { background: #EDE8DC; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .carousel-btn svg { width: 20px; height: 20px; color: #364153; }
+
+    .carousel-btn-prev { left: -22px; }
+    .carousel-btn-next { right: -22px; }
 
     /* ── Footer ──────────────────────────────────── */
     .footer {
@@ -178,25 +202,9 @@
       border-top: 1px solid #e5e7eb;
     }
 
-    .footer-heading {
-      font-size: 20px;
-      font-weight: 500;
-      color: #101828;
-      margin-bottom: 6px;
-      letter-spacing: -0.45px;
-    }
-
-    .footer-sub {
-      font-size: 17px;
-      color: #4a5565;
-      letter-spacing: -0.31px;
-    }
-
-    .footer-links {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+    .footer-heading { font-size: 20px; font-weight: 500; color: #101828; margin-bottom: 6px; letter-spacing: -0.45px; }
+    .footer-sub { font-size: 17px; color: #4a5565; letter-spacing: -0.31px; }
+    .footer-links { display: flex; align-items: center; gap: 20px; }
 
     .footer-email {
       display: flex;
@@ -208,7 +216,6 @@
       letter-spacing: -0.31px;
       transition: color 0.15s;
     }
-
     .footer-email:hover { color: #101828; }
     .footer-email img { width: 22px; height: 22px; }
 
@@ -223,24 +230,26 @@
       text-decoration: none;
       transition: background 0.15s;
     }
-
-    .footer-social:hover { background: #d1d5db; }
+    .footer-social:hover { background: #D8D0BE; }
     .footer-social img { width: 18px; height: 18px; }
 
-    @media (max-width: 860px) {
-      .nav { padding: 0 24px; }
-      .about { flex-direction: column; padding: 40px 24px; gap: 40px; align-items: flex-start; }
-      .about-avatar { width: 200px; }
-      .avatar-wrap { width: 200px; height: 269px; }
-      .avatar-wrap img.blob { width: 198px; height: 267px; }
-      .avatar-wrap img.portrait { width: 196px; height: 265px; }
-      .about-title { font-size: 32px; }
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 900px) {
+      .about-section { flex-direction: column; padding: 48px 24px; gap: 40px; }
+      .about-portrait { width: 100%; }
+      .about-portrait img { width: 100%; height: auto; aspect-ratio: 1/1; }
+      .carousel-section { padding: 48px 24px 64px; }
+      .carousel-slide { flex: 0 0 calc((100% - 20px) / 2); }
       .footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
     }
 
     @media (max-width: 600px) {
       .btn-about { display: none; }
-      .about-bio { font-size: 17px; }
+      .section-title { font-size: 28px; }
+      .about-para, .carousel-desc { font-size: 16px; }
+      .carousel-slide { flex: 0 0 100%; }
+      .carousel-btn-prev { left: 0; }
+      .carousel-btn-next { right: 0; }
     }
   </style>
 </head>
@@ -257,27 +266,42 @@
     </div>
   </nav>
 
-  <!-- About -->
-  <section class="about">
-    <div class="about-avatar">
-      <div class="avatar-wrap">
-        <img class="blob" src="assets/profile-circle.svg" alt="" aria-hidden="true" />
-        <img class="portrait" src="assets/profile-overlay.png" alt="Jade Riedl-Kovacs" />
-        <img class="deco-star" src="assets/deco-star.svg" alt="" aria-hidden="true" />
-        <img class="deco-sparkle" src="assets/deco-sparkle.svg" alt="" aria-hidden="true" />
-      </div>
+  <!-- About me -->
+  <section class="about-section">
+    <div class="about-portrait">
+      <img src="assets/pictures/portrait.jpeg" alt="Jade Riedl-Kovacs" />
     </div>
+    <div class="about-text">
+      <h1 class="section-title">About me</h1>
+      <p class="about-para">I have a computer engineering background — and for a long time, I thought that was my path. But during my master's, a UX class changed everything. I realised I cared far more about how things feel to use than how they're built under the hood. Even when I was coding, I always gravitated toward frontend and user satisfaction, turns out I was always a UX designer, I just didn't have the name for it yet.</p>
+      <p class="about-para">Landing my first internship at Emarsys as a UX Designer felt like confirmation. I completed the MOME Digital Product Design course to deepen my understanding of the process and develop my own projects, and I haven't looked back since.</p>
+      <p class="about-para">My engineering background turned out to be one of my biggest assets. I speak developer, I understand technical constraints, I know what's feasible, and I can have real conversations with engineers without losing something in translation. It makes collaboration faster, and it means my designs are grounded in reality from the start.</p>
+    </div>
+  </section>
 
-    <div class="about-content">
-      <h1 class="about-title">Hi, I'm Jade</h1>
-      <p class="about-bio">A junior UX/UI designer with a background in computer engineering. I approach design from both sides — I care about how things feel to use, and I understand how they get built.</p>
-      <p class="about-bio">I've worked on early-stage research, concept design, and UI across mobile and web products.</p>
-      <p class="about-bio">Based in Budapest. Outside of design I read a lot, crochet, and spend more time on puzzles and video games than I probably should.</p>
-      <div class="tags">
-        <span class="tag">Prototyping</span>
-        <span class="tag">User Research</span>
-        <span class="tag">UX/UI Design</span>
+  <hr class="section-divider" />
+
+  <!-- Carousel -->
+  <section class="carousel-section">
+    <h2 class="section-title">What I do when I'm not working</h2>
+    <p class="carousel-desc">If you can't find me at my computer, I'm probably in the kitchen experimenting with a new recipe, planning my next trip, or deep in a crafting project. Baking is my favourite way to decompress, there's something very satisfying about following a process and ending up with something delicious. Turns out I like systems whether I'm at work or not.<br><br>I also love to travel and experience new places through food, from food festivals closer to home to exploring local markets and restaurants abroad. I also spend a lot of time reading, going on long walks, and being thoroughly supervised by my cats.</p>
+
+    <div class="carousel-wrap">
+      <button class="carousel-btn carousel-btn-prev" id="prev-btn" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track-outer">
+        <div class="carousel-track" id="carousel-track">
+          <div class="carousel-slide"><img src="assets/pictures/museum1.jpeg" alt="Museum visit" /></div>
+          <div class="carousel-slide"><img src="assets/pictures/muserum2.jpeg" alt="Museum visit" /></div>
+          <div class="carousel-slide"><img src="assets/pictures/kurtos.jpeg" alt="Kürtős" /></div>
+          <div class="carousel-slide"><img src="assets/pictures/cat1.heic" alt="Cat" /></div>
+          <div class="carousel-slide"><img src="assets/pictures/cat2.jpeg" alt="Cat" /></div>
+        </div>
       </div>
+      <button class="carousel-btn carousel-btn-next" id="next-btn" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
   </section>
 
@@ -300,6 +324,46 @@
       </a>
     </div>
   </footer>
+
+  <script>
+    var track = document.getElementById('carousel-track');
+    var prevBtn = document.getElementById('prev-btn');
+    var nextBtn = document.getElementById('next-btn');
+    var slides = track.querySelectorAll('.carousel-slide');
+    var current = 0;
+    var visible = 3;
+
+    function getVisible() {
+      if (window.innerWidth <= 600) return 1;
+      if (window.innerWidth <= 900) return 2;
+      return 3;
+    }
+
+    function update() {
+      visible = getVisible();
+      var max = slides.length - visible;
+      if (current > max) current = max;
+      var slideWidth = track.parentElement.offsetWidth;
+      var gap = 20;
+      var itemWidth = (slideWidth - gap * (visible - 1)) / visible;
+      var offset = current * (itemWidth + gap);
+      track.style.transform = 'translateX(-' + offset + 'px)';
+      prevBtn.style.opacity = current === 0 ? '0.3' : '1';
+      nextBtn.style.opacity = current >= max ? '0.3' : '1';
+    }
+
+    prevBtn.addEventListener('click', function() {
+      if (current > 0) { current--; update(); }
+    });
+
+    nextBtn.addEventListener('click', function() {
+      visible = getVisible();
+      if (current < slides.length - visible) { current++; update(); }
+    });
+
+    window.addEventListener('resize', update);
+    update();
+  </script>
 
 </body>
 </html>
