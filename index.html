@@ -20,10 +20,11 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(250, 245, 233, 0.85);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid #e5e7eb;
+      background: rgba(250, 245, 233, 0.55);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 0 1px 0 rgba(180, 160, 120, 0.18);
       padding: 0 40px;
       height: 72px;
       display: flex;
@@ -545,10 +546,10 @@
         [235, 210, 175],  // pale sand
         [220, 185, 140],  // muted peach
         [191, 140, 100],  // soft terracotta
-        [245, 200,  80],  // warm yellow
+        [195, 180, 155],  // warm taupe
         [250, 245, 233],  // beige
         [238, 225, 195],  // warm cream
-        [245, 200,  80],  // warm yellow
+        [195, 180, 155],  // warm taupe
       ];
 
       function getColor(v) {
