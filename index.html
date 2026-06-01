@@ -104,6 +104,16 @@
       height: 100%;
     }
 
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.18;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+
     .hero-title {
       font-family: 'Fraunces', serif;
       font-size: clamp(36px, 5vw, 64px);
@@ -387,6 +397,7 @@
     <div class="hero-tiles">
       <canvas class="hero-canvas" id="plasma-canvas"></canvas>
     </div>
+    <div class="hero-grain"></div>
     <h1 class="hero-title">I'm Jade Riedl-Kovács,<br>a <span class="accent">UX/UI Designer</span> based in Budapest.</h1>
   </section>
 
@@ -526,15 +537,18 @@
       var t = 0;
       var mx = 0.5, my = 0.5;
 
-      // Palette: beige → amber → terracotta → green → yellow
+      // Palette: beige-heavy, muted accents
       var palette = [
         [250, 245, 233],  // beige
-        [245, 195,  90],  // amber
-        [191, 110,  70],  // terracotta
-        [111, 189, 146],  // sage green
-        [245, 165,  80],  // warm orange
-        [160, 210, 160],  // light green
-        [251, 202, 142],  // peach
+        [250, 245, 233],  // beige
+        [242, 230, 210],  // warm off-white
+        [235, 210, 175],  // pale sand
+        [220, 185, 140],  // muted peach
+        [191, 140, 100],  // soft terracotta
+        [160, 200, 170],  // pale sage
+        [250, 245, 233],  // beige
+        [238, 225, 195],  // warm cream
+        [145, 185, 155],  // muted green
       ];
 
       function getColor(v) {
