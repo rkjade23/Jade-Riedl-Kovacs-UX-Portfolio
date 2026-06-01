@@ -17,14 +17,13 @@
 
     /* ── Nav ──────────────────────────────────── */
     .nav {
-      position: sticky;
-      top: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       background: rgba(250, 245, 233, 0.55);
       backdrop-filter: blur(18px) saturate(160%);
       -webkit-backdrop-filter: blur(18px) saturate(160%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.45);
-      box-shadow: 0 1px 0 rgba(180, 160, 120, 0.18);
+      border-bottom: 1px solid #D8D0BE;
       padding: 0 40px;
       height: 72px;
       display: flex;
@@ -70,7 +69,7 @@
     .about-section {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 72px 60px;
+      padding: 112px 60px 72px;
       display: flex;
       gap: 72px;
       align-items: flex-start;
@@ -115,7 +114,7 @@
     /* ── Divider ──────────────────────────────── */
     .section-divider {
       border: none;
-      border-top: 1px solid #e5e7eb;
+      border-top: 1px solid #D8D0BE;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -137,7 +136,6 @@
       line-height: 1.75;
       letter-spacing: -0.2px;
       margin-bottom: 40px;
-      max-width: 800px;
     }
 
     .carousel-wrap {
@@ -155,8 +153,13 @@
       transition: transform 0.4s ease;
     }
 
+    .carousel-track.no-transition {
+      transition: none;
+    }
+
     .carousel-slide {
       flex: 0 0 calc((100% - 40px) / 3);
+      flex-shrink: 0;
     }
 
     .carousel-slide img {
@@ -174,7 +177,7 @@
       width: 44px;
       height: 44px;
       background: #FAF5E9;
-      border: 1px solid #e5e7eb;
+      border: 1px solid #D8D0BE;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
@@ -200,7 +203,7 @@
       gap: 24px;
       max-width: 1600px;
       margin: 0 auto;
-      border-top: 1px solid #e5e7eb;
+      border-top: 1px solid #D8D0BE;
     }
 
     .footer-heading { font-size: 20px; font-weight: 500; color: #101828; margin-bottom: 6px; letter-spacing: -0.45px; }
@@ -236,7 +239,7 @@
 
     /* ── Responsive ──────────────────────────────── */
     @media (max-width: 900px) {
-      .about-section { flex-direction: column; padding: 48px 24px; gap: 40px; }
+      .about-section { flex-direction: column; padding: 100px 24px 48px; gap: 40px; }
       .about-portrait { width: 100%; }
       .about-portrait img { width: 100%; height: auto; aspect-ratio: 1/1; }
       .carousel-section { padding: 48px 24px 64px; }
@@ -294,9 +297,9 @@
       <div class="carousel-track-outer">
         <div class="carousel-track" id="carousel-track">
           <div class="carousel-slide"><img src="assets/pictures/museum1.jpeg" alt="Museum visit" /></div>
-          <div class="carousel-slide"><img src="assets/pictures/muserum2.jpeg" alt="Museum visit" /></div>
+          <div class="carousel-slide"><img src="assets/pictures/cat1.jpg" alt="Cat" /></div>
           <div class="carousel-slide"><img src="assets/pictures/kurtos.jpeg" alt="Kürtős" /></div>
-          <div class="carousel-slide"><img src="assets/pictures/cat1.heic" alt="Cat" /></div>
+          <div class="carousel-slide"><img src="assets/pictures/muserum2.jpeg" alt="Museum visit" /></div>
           <div class="carousel-slide"><img src="assets/pictures/cat2.jpeg" alt="Cat" /></div>
         </div>
       </div>
@@ -327,43 +330,98 @@
   </footer>
 
   <script>
-    var track = document.getElementById('carousel-track');
-    var prevBtn = document.getElementById('prev-btn');
-    var nextBtn = document.getElementById('next-btn');
-    var slides = track.querySelectorAll('.carousel-slide');
-    var current = 0;
-    var visible = 3;
+    (function() {
+      var track = document.getElementById('carousel-track');
+      var prevBtn = document.getElementById('prev-btn');
+      var nextBtn = document.getElementById('next-btn');
 
-    function getVisible() {
-      if (window.innerWidth <= 600) return 1;
-      if (window.innerWidth <= 900) return 2;
-      return 3;
-    }
+      var origSlides = Array.from(track.querySelectorAll('.carousel-slide'));
+      var total = origSlides.length;
 
-    function update() {
-      visible = getVisible();
-      var max = slides.length - visible;
-      if (current > max) current = max;
-      var slideWidth = track.parentElement.offsetWidth;
-      var gap = 20;
-      var itemWidth = (slideWidth - gap * (visible - 1)) / visible;
-      var offset = current * (itemWidth + gap);
-      track.style.transform = 'translateX(-' + offset + 'px)';
-      prevBtn.style.opacity = current === 0 ? '0.3' : '1';
-      nextBtn.style.opacity = current >= max ? '0.3' : '1';
-    }
+      function getVisible() {
+        if (window.innerWidth <= 600) return 1;
+        if (window.innerWidth <= 900) return 2;
+        return 3;
+      }
 
-    prevBtn.addEventListener('click', function() {
-      if (current > 0) { current--; update(); }
-    });
+      // Clone slides for infinite loop: append clones at end, prepend at start
+      function buildClones() {
+        var vis = getVisible();
+        // Remove existing clones
+        track.querySelectorAll('.carousel-slide.clone').forEach(function(el) { el.remove(); });
+        // Prepend vis clones from end
+        for (var i = total - 1; i >= total - vis; i--) {
+          var clone = origSlides[i].cloneNode(true);
+          clone.classList.add('clone');
+          track.insertBefore(clone, track.firstChild);
+        }
+        // Append vis clones from start
+        for (var j = 0; j < vis; j++) {
+          var clone2 = origSlides[j].cloneNode(true);
+          clone2.classList.add('clone');
+          track.appendChild(clone2);
+        }
+      }
 
-    nextBtn.addEventListener('click', function() {
-      visible = getVisible();
-      if (current < slides.length - visible) { current++; update(); }
-    });
+      var current = 0; // index into origSlides (0-based)
 
-    window.addEventListener('resize', update);
-    update();
+      function getOffset(idx, vis) {
+        var slideWidth = track.parentElement.offsetWidth;
+        var gap = 20;
+        var itemWidth = (slideWidth - gap * (vis - 1)) / vis;
+        // actual position = idx + vis (because we prepended vis clones)
+        return (idx + vis) * (itemWidth + gap);
+      }
+
+      function setPosition(idx, animate) {
+        var vis = getVisible();
+        var offset = getOffset(idx, vis);
+        if (!animate) { track.classList.add('no-transition'); }
+        track.style.transform = 'translateX(-' + offset + 'px)';
+        if (!animate) {
+          track.offsetHeight; // force reflow
+          track.classList.remove('no-transition');
+        }
+      }
+
+      function setup() {
+        buildClones();
+        setPosition(current, false);
+      }
+
+      function next() {
+        var vis = getVisible();
+        current++;
+        setPosition(current, true);
+        if (current >= total) {
+          setTimeout(function() {
+            current = 0;
+            setPosition(current, false);
+          }, 400);
+        }
+      }
+
+      function prev() {
+        var vis = getVisible();
+        current--;
+        setPosition(current, true);
+        if (current < 0) {
+          setTimeout(function() {
+            current = total - 1;
+            setPosition(current, false);
+          }, 400);
+        }
+      }
+
+      nextBtn.addEventListener('click', next);
+      prevBtn.addEventListener('click', prev);
+
+      window.addEventListener('resize', function() {
+        setup();
+      });
+
+      setup();
+    })();
   </script>
 
 </body>
